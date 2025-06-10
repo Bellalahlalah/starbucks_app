@@ -12,7 +12,7 @@ class _InboxScreenState extends State<InboxScreen> {
   // Mock data
   final List<InboxItem> items = [
     InboxItem(
-      image: 'assets/images/menuNews_1.jpg',
+      image: 'assets/images/circlemenuinbox.png',
       title: 'Enjoy Starbucks beverages – only 140 Baht!',
       date: '09 Jun 2025',
       read: false,
@@ -24,7 +24,7 @@ class _InboxScreenState extends State<InboxScreen> {
       read: false,
     ),
     InboxItem(
-      image: 'assets/images/menuNews_1.jpg',
+      image: 'assets/images/circlemenuinbox.png',
       title: 'Earn Double Stars',
       date: '04 Jun 2025',
       read: false,
@@ -36,7 +36,7 @@ class _InboxScreenState extends State<InboxScreen> {
       read: false,
     ),
     InboxItem(
-      image: 'assets/images/menuNews_1.jpg',
+      image: 'assets/images/circlemenuinbox.png',
       title: 'Happy Specials! Only 125 Baht',
       date: '19 May 2025',
       read: false,
@@ -48,7 +48,7 @@ class _InboxScreenState extends State<InboxScreen> {
       read: false,
     ),
     InboxItem(
-      image: 'assets/images/menuNews_1.jpg',
+      image: 'assets/images/circlemenuinbox.png',
       title: 'Earn Double Stars',
       date: '28 Apr 2025',
       read: false,

@@ -1,12 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:starbucks_app/pages/join_now.dart';
+import 'package:starbucks_app/pages/sign_in.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
+import 'package:starbucks_app/service/user_service.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userService = Get.find<UserService>();
+    final isLoggedIn = userService.isLoggedIn;
+
+    if (!isLoggedIn) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const SizedBox.shrink(),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 80),
+              Center(
+                child: Column(
+                  children: [
+                    Image.asset('assets/images/ordertwocups.png', height: 80),
+                    const SizedBox(height: 32),
+                    const Text(
+                      'Welcome to Starbucks® Rewards',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Say hello to easy ordering, tasty Rewards and get your favorites for free.',
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFF00704A),
+                        backgroundColor: const Color(0xFFF2FBF6),
+                        side: BorderSide.none,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInScreen()),
+                        );
+                        if (result == true) {
+                          (context as Element).markNeedsBuild();
+                        }
+                      },
+                      child: const Text('Sign in',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00704A),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const JoinNowScreen()),
+                        );
+                        if (result == 'sign_in') {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInScreen()),
+                          );
+                        }
+                      },
+                      child: const Text('Join now',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+            ],
+          ),
+        ),
+        bottomNavigationBar: const BottomNavBar(),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Order'.tr, style: TextStyle(color: Colors.white)),

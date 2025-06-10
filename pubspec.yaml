@@ -69,6 +69,10 @@ flutter:
     - assets/images/reward.png
     - assets/images/reward1.png
     - assets/images/menuNews_1.jpg
+    - assets/images/snoopycard.png
+    - assets/images/ordertwocups.png
+    - assets/images/circlemenuinbox.png
+    - assets/images/starbucks_welcome.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

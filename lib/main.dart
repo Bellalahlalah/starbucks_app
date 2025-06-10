@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // ต้อง import ทั้ง package
 import 'package:starbucks_app/controller/theme_controller.dart';
-import 'package:starbucks_app/data/user_service.dart';
+import 'package:starbucks_app/service/user_service.dart';
 import 'package:starbucks_app/pages/account_screen.dart';
 import 'package:starbucks_app/pages/card_screen.dart';
 import 'package:starbucks_app/pages/home_screen.dart';
@@ -19,7 +19,7 @@ import 'package:starbucks_app/localization/app_translations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(UserService());
+  Get.put(UserService()); // ลงทะเบียน UserService ใน GetX
   Get.put(BottomNavController());
   Get.put(ThemeController());
   Get.put(LanguageController());

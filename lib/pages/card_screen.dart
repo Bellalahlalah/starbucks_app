@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:starbucks_app/data/mock_user.dart';
-import 'package:starbucks_app/models/user.dart';
+import 'package:starbucks_app/pages/join_now.dart';
+import 'package:starbucks_app/pages/sign_in.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
 import 'package:starbucks_app/service/user_service.dart';
 
@@ -11,46 +11,104 @@ class CardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userService = Get.find<UserService>();
+    final isLoggedIn = userService.isLoggedIn;
 
-    // เช็คสถานะล็อกอินก่อน
-    if (!userService.isLoggedIn) {
+    if (!isLoggedIn) {
       return Scaffold(
-        backgroundColor: const Color(0xFFF7F7F7),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: const Color(0xFF1E3932),
+          backgroundColor: Colors.white,
           elevation: 0,
-          toolbarHeight: 100,
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: Row(
-              children: [
-                Text(
-                  '07:02',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                const Icon(Icons.volume_off, color: Colors.white, size: 20),
-                const Spacer(),
-                CircleAvatar(
-                  radius: 18,
-                  backgroundImage: AssetImage('assets/avatar.jpg'),
-                ),
-              ],
-            ),
-          ),
+          title: const SizedBox.shrink(),
         ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              userService.login(mockUser); // จำลองล็อกอิน
-            },
-            child: const Text('Sign in to view your account'),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 48),
+              Center(
+                child: Column(
+                  children: [
+                    Image.asset('assets/images/starbucks_welcome.png',
+                        height: 80),
+                    const SizedBox(height: 32),
+                    const Text(
+                      'Welcome to Starbucks® Rewards',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.',
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFF00704A),
+                        backgroundColor: const Color(0xFFF2FBF6),
+                        side: BorderSide.none,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInScreen()),
+                        );
+                        if (result == true) {
+                          (context as Element).markNeedsBuild();
+                        }
+                      },
+                      child: const Text('Sign in',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00704A),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const JoinNowScreen()),
+                        );
+                        if (result == 'sign_in') {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInScreen()),
+                          );
+                        }
+                      },
+                      child: const Text('Join now',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+            ],
           ),
         ),
         bottomNavigationBar: const BottomNavBar(),
@@ -71,9 +129,9 @@ class CardScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16),
           child: Row(
             children: [
-              Text(
+              const Text(
                 '07:02',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -83,7 +141,7 @@ class CardScreen extends StatelessWidget {
               const SizedBox(width: 8),
               const Icon(Icons.volume_off, color: Colors.white, size: 20),
               const Spacer(),
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 18,
                 backgroundImage: AssetImage('assets/avatar.jpg'),
               ),
@@ -169,7 +227,7 @@ class CardScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
-                    'assets/images/menuNews_1.jpg', // เปลี่ยน path ตามไฟล์จริง
+                    'assets/images/snoopycard.png',
                     height: 120,
                     width: double.infinity,
                     fit: BoxFit.cover,

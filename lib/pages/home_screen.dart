@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:starbucks_app/pages/join_now.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -387,7 +388,13 @@ class HomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const JoinNowScreen()));
+                            },
                             child: const Text(
                               "Join Now",
                               style: TextStyle(

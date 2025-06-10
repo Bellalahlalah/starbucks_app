@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:starbucks_app/controller/theme_controller.dart';
 import 'package:starbucks_app/controller/language_controller.dart';
+import 'package:starbucks_app/pages/join_now.dart';
+import 'package:starbucks_app/pages/sign_in.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
+import 'package:starbucks_app/service/user_service.dart';
+import 'package:starbucks_app/data/mock_user.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -16,8 +20,12 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userService = Get.find<UserService>();
     final ThemeController themeController = Get.find();
     final LanguageController languageController = Get.find();
+
+    final bool isLoggedIn = userService.isLoggedIn;
+    final user = userService.currentUser.value;
 
     return Scaffold(
       appBar: AppBar(
@@ -33,45 +41,114 @@ class _AccountScreenState extends State<AccountScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
               children: [
                 const SizedBox(height: 16),
-                // ชื่อผู้ใช้
-                const Align(
+                // ชื่อผู้ใช้หรือ Account
+                Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'nunthawun',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  child: isLoggedIn
+                      ? Text(
+                          user!.name,
+                          style: const TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        )
+                      : const Text(
+                          'Account',
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                ),
+                const SizedBox(height: 16),
+                // ปุ่ม sign in/join now เมื่อ sign out
+                if (!isLoggedIn)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: const Color(0xFF00704A),
+                            backgroundColor: const Color(0xFFF2FBF6),
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24)),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          onPressed: () async {
+                            //ไปหน้า sign in
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignInScreen()),
+                            );
+                            if (result == true) {
+                              setState(() {});
+                            }
+                          },
+                          child: const Text(
+                            'Sign in',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF00704A),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24)),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const JoinNowScreen()),
+                            );
+                          },
+                          child: const Text(
+                            'Join now',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 24),
+                if (!isLoggedIn) const SizedBox(height: 24),
 
-                // ACCOUNT DETAILS
-                _sectionTitle('ACCOUNT DETAILS'),
-                _accountMenu(
-                  title: 'Your mobile order(s)',
-                  icon: Icons.receipt_long,
-                  onTap: () {},
-                ),
-                _accountMenu(
-                  title: 'My credit / debit cards',
-                  icon: Icons.credit_card,
-                  onTap: () {},
-                ),
-                _accountMenu(
-                  title: 'Delivery address',
-                  icon: Icons.location_on,
-                  onTap: () {},
-                ),
-                _accountMenu(
-                  title: 'Personal information',
-                  icon: Icons.person,
-                  onTap: () {},
-                ),
-                _accountMenu(
-                  title: 'Starbucks® Rewards',
-                  icon: Icons.star,
-                  onTap: () {},
-                ),
-                const SizedBox(height: 8),
-                _divider(),
+                // เมนูเมื่อ sign in
+                if (isLoggedIn) ...[
+                  const SizedBox(height: 24),
+                  _sectionTitle('ACCOUNT DETAILS'),
+                  _accountMenu(
+                    title: 'Your mobile order(s)',
+                    icon: Icons.receipt_long,
+                    onTap: () {},
+                  ),
+                  _accountMenu(
+                    title: 'My credit / debit cards',
+                    icon: Icons.credit_card,
+                    onTap: () {},
+                  ),
+                  _accountMenu(
+                    title: 'Delivery address',
+                    icon: Icons.location_on,
+                    onTap: () {},
+                  ),
+                  _accountMenu(
+                    title: 'Personal information',
+                    icon: Icons.person,
+                    onTap: () {},
+                  ),
+                  _accountMenu(
+                    title: 'Starbucks® Rewards',
+                    icon: Icons.star,
+                    onTap: () {},
+                  ),
+                  const SizedBox(height: 8),
+                  _divider(),
+                ],
 
                 // SETTINGS
                 _sectionTitle('SETTINGS'),
@@ -79,10 +156,11 @@ class _AccountScreenState extends State<AccountScreen> {
                   title: 'General',
                   onTap: () {},
                 ),
-                _simpleMenu(
-                  title: 'Security',
-                  onTap: () {},
-                ),
+                if (isLoggedIn)
+                  _simpleMenu(
+                    title: 'Security',
+                    onTap: () {},
+                  ),
                 // Language
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0, right: 0),
@@ -108,29 +186,6 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   onTap: null,
                 ),
-                // Theme
-                Obx(() => ListTile(
-                      contentPadding: const EdgeInsets.only(left: 0, right: 0),
-                      title: const Text('Theme',
-                          style: TextStyle(fontWeight: FontWeight.normal)),
-                      trailing: DropdownButton<ThemeMode>(
-                        value: themeController.themeMode.value,
-                        underline: const SizedBox(),
-                        items: const [
-                          DropdownMenuItem(
-                              value: ThemeMode.system, child: Text('System')),
-                          DropdownMenuItem(
-                              value: ThemeMode.light, child: Text('Light')),
-                          DropdownMenuItem(
-                              value: ThemeMode.dark, child: Text('Dark')),
-                        ],
-                        onChanged: (mode) {
-                          if (mode != null) {
-                            themeController.setThemeMode(mode);
-                          }
-                        },
-                      ),
-                    )),
                 const SizedBox(height: 8),
                 _divider(),
 
@@ -156,69 +211,95 @@ class _AccountScreenState extends State<AccountScreen> {
                   title: 'Tell a friend',
                   onTap: () {},
                 ),
-                const SizedBox(height: 8),
-                _divider(),
-
-                // Delete account (แยกเดี่ยว)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.only(left: 0, right: 0),
-                    title: const Text(
-                      'Delete account',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                    trailing:
-                        const Icon(Icons.chevron_right, color: Colors.grey),
-                    onTap: () {},
-                    minLeadingWidth: 0,
-                    horizontalTitleGap: 0,
-                  ),
-                ),
-                _divider(),
-                const SizedBox(height: 24),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 180,
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.green,
-                        side: const BorderSide(color: Colors.green, width: 1.5),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24)),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Sign out',
+                if (isLoggedIn) ...[
+                  const SizedBox(height: 8),
+                  _divider(),
+                  // Delete account (แยกเดี่ยว)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.only(left: 0, right: 0),
+                      title: const Text(
+                        'Delete account',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
+                      trailing:
+                          const Icon(Icons.chevron_right, color: Colors.grey),
+                      onTap: () {},
+                      minLeadingWidth: 0,
+                      horizontalTitleGap: 0,
                     ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                const Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'App version 7.2.4',
-                    style: TextStyle(
-                        color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
-                  ),
-                ),
+                  _divider(),
+                  const SizedBox(height: 24),
+                ],
               ],
             ),
           ),
+          // Sign out button (เฉพาะตอนล็อกอิน)
+          if (isLoggedIn)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: 180,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.green,
+                          side:
+                              const BorderSide(color: Colors.green, width: 1.5),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24)),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        ),
+                        onPressed: () async {
+                          final result = await showDialog<bool>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => _signOutDialog(context),
+                          );
+                          if (result == true) {
+                            userService.logout();
+                            setState(() {});
+                          }
+                        },
+                        child: const Text(
+                          'Sign out',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      'App version 7.2.4',
+                      style: TextStyle(
+                          color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (!isLoggedIn)
+            const Padding(
+              padding: EdgeInsets.fromLTRB(24, 0, 24, 24),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'App version 7.2.4',
+                  style: TextStyle(
+                      color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
+                ),
+              ),
+            ),
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),
@@ -273,4 +354,74 @@ class _AccountScreenState extends State<AccountScreen> {
         thickness: 1,
         height: 32,
       );
+
+  // Dialog ยืนยัน sign out
+  Widget _signOutDialog(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Sign me out',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Are you sure you want to sign out?',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 28),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF00704A),
+                      backgroundColor: const Color(0xFFF2FBF6),
+                      side: BorderSide.none,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24)),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Text(
+                      'Sign out',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00704A),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24)),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: const Text(
+                      'Not now',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
