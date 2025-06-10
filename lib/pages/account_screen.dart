@@ -1,0 +1,276 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:starbucks_app/controller/theme_controller.dart';
+import 'package:starbucks_app/controller/language_controller.dart';
+import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
+
+class AccountScreen extends StatefulWidget {
+  const AccountScreen({super.key});
+
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  String _language = 'English';
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final LanguageController languageController = Get.find();
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const SizedBox.shrink(),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+              children: [
+                const SizedBox(height: 16),
+                // ชื่อผู้ใช้
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'nunthawun',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // ACCOUNT DETAILS
+                _sectionTitle('ACCOUNT DETAILS'),
+                _accountMenu(
+                  title: 'Your mobile order(s)',
+                  icon: Icons.receipt_long,
+                  onTap: () {},
+                ),
+                _accountMenu(
+                  title: 'My credit / debit cards',
+                  icon: Icons.credit_card,
+                  onTap: () {},
+                ),
+                _accountMenu(
+                  title: 'Delivery address',
+                  icon: Icons.location_on,
+                  onTap: () {},
+                ),
+                _accountMenu(
+                  title: 'Personal information',
+                  icon: Icons.person,
+                  onTap: () {},
+                ),
+                _accountMenu(
+                  title: 'Starbucks® Rewards',
+                  icon: Icons.star,
+                  onTap: () {},
+                ),
+                const SizedBox(height: 8),
+                _divider(),
+
+                // SETTINGS
+                _sectionTitle('SETTINGS'),
+                _simpleMenu(
+                  title: 'General',
+                  onTap: () {},
+                ),
+                _simpleMenu(
+                  title: 'Security',
+                  onTap: () {},
+                ),
+                // Language
+                ListTile(
+                  contentPadding: const EdgeInsets.only(left: 0, right: 0),
+                  title: const Text('Language',
+                      style: TextStyle(fontWeight: FontWeight.normal)),
+                  trailing: DropdownButton<String>(
+                    value: _language,
+                    underline: const SizedBox(),
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'English', child: Text('English')),
+                      DropdownMenuItem(value: 'ไทย', child: Text('ไทย')),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _language = value;
+                        });
+                        languageController
+                            .setLanguage(value == 'English' ? 'en' : 'th');
+                      }
+                    },
+                  ),
+                  onTap: null,
+                ),
+                // Theme
+                Obx(() => ListTile(
+                      contentPadding: const EdgeInsets.only(left: 0, right: 0),
+                      title: const Text('Theme',
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                      trailing: DropdownButton<ThemeMode>(
+                        value: themeController.themeMode.value,
+                        underline: const SizedBox(),
+                        items: const [
+                          DropdownMenuItem(
+                              value: ThemeMode.system, child: Text('System')),
+                          DropdownMenuItem(
+                              value: ThemeMode.light, child: Text('Light')),
+                          DropdownMenuItem(
+                              value: ThemeMode.dark, child: Text('Dark')),
+                        ],
+                        onChanged: (mode) {
+                          if (mode != null) {
+                            themeController.setThemeMode(mode);
+                          }
+                        },
+                      ),
+                    )),
+                const SizedBox(height: 8),
+                _divider(),
+
+                // ABOUT
+                _sectionTitle('ABOUT'),
+                _simpleMenu(
+                  title: 'FAQs',
+                  onTap: () {},
+                ),
+                _simpleMenu(
+                  title: 'Terms of use',
+                  onTap: () {},
+                ),
+                _simpleMenu(
+                  title: 'Privacy policy',
+                  onTap: () {},
+                ),
+                _simpleMenu(
+                  title: 'Feedback',
+                  onTap: () {},
+                ),
+                _simpleMenu(
+                  title: 'Tell a friend',
+                  onTap: () {},
+                ),
+                const SizedBox(height: 8),
+                _divider(),
+
+                // Delete account (แยกเดี่ยว)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.only(left: 0, right: 0),
+                    title: const Text(
+                      'Delete account',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    trailing:
+                        const Icon(Icons.chevron_right, color: Colors.grey),
+                    onTap: () {},
+                    minLeadingWidth: 0,
+                    horizontalTitleGap: 0,
+                  ),
+                ),
+                _divider(),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 180,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.green,
+                        side: const BorderSide(color: Colors.green, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24)),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Sign out',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'App version 7.2.4',
+                    style: TextStyle(
+                        color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const BottomNavBar(),
+    );
+  }
+
+  Widget _sectionTitle(String title) => Padding(
+        padding: const EdgeInsets.only(top: 24, bottom: 8),
+        child: Text(
+          title.toUpperCase(),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+            letterSpacing: 1.2,
+            fontSize: 13,
+          ),
+          textAlign: TextAlign.left,
+        ),
+      );
+
+  Widget _accountMenu(
+      {required String title,
+      required IconData icon,
+      required VoidCallback onTap}) {
+    return ListTile(
+      contentPadding: const EdgeInsets.only(left: 0, right: 0),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.normal)),
+      trailing: CircleAvatar(
+        backgroundColor: Colors.grey[200],
+        radius: 18,
+        child: Icon(icon, color: Colors.black, size: 20),
+      ),
+      onTap: onTap,
+      minLeadingWidth: 0,
+      horizontalTitleGap: 0,
+    );
+  }
+
+  Widget _simpleMenu({required String title, required VoidCallback onTap}) {
+    return ListTile(
+      contentPadding: const EdgeInsets.only(left: 0, right: 0),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.normal)),
+      trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+      onTap: onTap,
+      minLeadingWidth: 0,
+      horizontalTitleGap: 0,
+    );
+  }
+
+  Widget _divider() => const Divider(
+        color: Color(0xFFE0E0E0),
+        thickness: 1,
+        height: 32,
+      );
+}
