@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starbucks_app/data/mock_address_service.dart';
+import 'package:starbucks_app/pages/widgets/order_map_screen.dart';
 
 class OrderAddressScreen extends StatelessWidget {
   const OrderAddressScreen({super.key});
@@ -10,35 +11,93 @@ class OrderAddressScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        //icon back button
+        backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
-          'เลือกที่อยู่จัดส่ง',
-          style: TextStyle(color: Colors.white),
+          'Search for location',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color(0xFF00704A),
+        centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: addresses.length,
-        separatorBuilder: (_, __) => const Divider(),
-        itemBuilder: (context, index) {
-          final address = addresses[index];
-          return ListTile(
-            leading: const Icon(Icons.location_on, color: Color(0xFF00704A)),
-            title: Text(address.name),
-            subtitle: Text(address.detail),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('เลือกที่อยู่: ${address.name}')),
-              );
-            },
-          );
-        },
+      backgroundColor: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Search box
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: TextField(
+              enabled: false,
+              decoration: InputDecoration(
+                hintText: 'Enter a building or a street name',
+                hintStyle: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'RECENT SEARCHES',
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: ListView.separated(
+              itemCount: addresses.length,
+              separatorBuilder: (_, __) => const Divider(),
+              itemBuilder: (context, index) {
+                final address = addresses[index];
+                return ListTile(
+                  leading: const Icon(Icons.access_time, color: Colors.grey),
+                  title: Text(
+                    address.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(address.detail),
+                  onTap: () {
+                    // ไปหน้าแผนที่ พร้อมส่ง address ไป
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderMapScreen(address: address),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
