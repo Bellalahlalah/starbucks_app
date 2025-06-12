@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:starbucks_app/data/mock_address_service.dart';
 
 class OrderMapScreen extends StatefulWidget {
   final dynamic address;

@@ -6,7 +6,6 @@ import 'package:starbucks_app/pages/join_now.dart';
 import 'package:starbucks_app/pages/sign_in.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
 import 'package:starbucks_app/service/user_service.dart';
-import 'package:starbucks_app/data/mock_user.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});

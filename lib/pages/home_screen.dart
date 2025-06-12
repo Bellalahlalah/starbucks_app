@@ -2,15 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:starbucks_app/pages/join_now.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
+import 'package:starbucks_app/service/user_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-// Method of _buildMenuButton
+  // Greeting ตามช่วงเวลา
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning';
+    } else if (hour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  }
+
+  // Method สร้างปุ่มเมนู
   Widget _buildMenuButton({
     required IconData icon,
     required String text,
     required VoidCallback onPressed,
+    required Color color,
   }) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -42,8 +56,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-//---------------------------------
-//Method สร้างเมนูวงกลม
+  // Method สร้างเมนูวงกลม
   Widget _buildCircleMenuButton({
     required IconData icon,
     required String label,
@@ -57,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-              color: Colors.grey[200], // สีเทาอ่อน
+              color: Colors.grey[200],
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -80,8 +93,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-//---------------------------------
-//Method News &Promotions
+  // News & Promotions Section
   Widget _buildNewsPromotionSection() {
     final List<PromotionItem> promotions = [
       PromotionItem(
@@ -98,13 +110,11 @@ class HomeScreen extends StatelessWidget {
         imagePath: 'assets/images/reward1.png',
         isNew: false,
       ),
-      // เพิ่ม promotion อื่นๆ ตามต้องการ
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // หัวข้อ
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Text(
@@ -115,10 +125,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-
-        // Carousel
         SizedBox(
-          height: 350, // กำหนดความสูงของ carousel
+          height: 350,
           child: PageView.builder(
             controller: PageController(viewportFraction: 0.9),
             itemCount: promotions.length,
@@ -127,19 +135,15 @@ class HomeScreen extends StatelessWidget {
             },
           ),
         ),
-
-        // ส่วนเมนูล่าง
-        //_buildBottomNavigationBar(),
       ],
     );
   }
 
-//build promotion card
+  // Promotion Card
   Widget _buildPromotionCard(PromotionItem item) {
     return GestureDetector(
       onTap: () {
         // นำทางไปหน้า Promotion Detail
-        Navigator.defaultRouteName;
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -149,7 +153,6 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              // รูปภาพ Promotion
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
@@ -159,8 +162,6 @@ class HomeScreen extends StatelessWidget {
                   height: double.infinity,
                 ),
               ),
-
-              // ข้อความและ Badge
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -226,12 +227,15 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-//--------------------------------------------
 
   @override
   Widget build(BuildContext context) {
+    final userService = Get.find<UserService>();
+    final user = userService.currentUser.value;
+    final isLoggedIn = user != null;
+
     return Scaffold(
-      backgroundColor: (Colors.white),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -241,22 +245,28 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 48),
           child: Align(
             alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'signin');
-                },
-                child: const Text(
-                  'Sign in',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            child: Obx(() {
+              final user = userService.currentUser.value;
+              final isLoggedIn = user != null;
+              return !isLoggedIn
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'signin');
+                        },
+                        child: const Text(
+                          'Sign in',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink();
+            }),
           ),
         ),
       ),
@@ -264,98 +274,110 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, bottom: 20),
-              child: Text(
-                "It's a great day for coffee",
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
+              child: Obx(() {
+                final user = userService.currentUser.value;
+                final isLoggedIn = user != null;
+                return isLoggedIn
+                    ? Text(
+                        '${_getGreeting()},\n${user.name}',
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      )
+                    : const Text(
+                        "It's a great day for coffee",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      );
+              }),
             ),
-            //สร้าง menu Findstore
+            // Find a store menu
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   _buildMenuButton(
-                      icon: Icons.location_on,
-                      text: "Find a store",
-                      onPressed: () {})
+                    icon: Icons.location_on_outlined,
+                    color: Colors.white,
+                    text: "Find a store",
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'address');
+                    },
+                  ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 15,
-            ),
-            Divider(
+            const SizedBox(height: 15),
+            const Divider(
               height: 12,
-              color: const Color.fromARGB(255, 247, 250, 252),
+              color: Color.fromARGB(255, 247, 250, 252),
               thickness: 5,
             ),
-
-            SizedBox(
-              height: 15,
-            ),
-
-            // Row 2 (4 Menu)
+            const SizedBox(height: 15),
+            // 4 Circle Menus
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildCircleMenuButton(
                   icon: Icons.credit_card,
                   label: 'Pay in\nstore',
-                  onTap: () =>
-                      Text('Pay in store clicked'), //เดี๋ยวมาแก้ตรงนี้ด้วย
+                  onTap: () {},
                 ),
                 _buildCircleMenuButton(
                   icon: Icons.delivery_dining,
-                  label: 'Delivery',
-                  onTap: () => Text('Delivery clicked'),
+                  label: 'Delivery\n',
+                  onTap: () {
+                    Navigator.pushNamed(context, 'address');
+                  },
                 ),
                 _buildCircleMenuButton(
                   icon: Icons.store,
                   label: 'In-store\nPickup',
-                  onTap: () => Text('In-store Pickup clicked'),
+                  onTap: () {
+                    Navigator.pushNamed(context, 'stores');
+                  },
                 ),
                 _buildCircleMenuButton(
                   icon: Icons.table_restaurant,
                   label: 'Order to\nTable',
-                  onTap: () => Text('Order to Table clicked'),
+                  onTap: () {
+                    Navigator.pushNamed(context, 'scanqr');
+                  },
                 ),
               ],
             ),
-
-            SizedBox(
-              height: 15,
-            ),
-
-            //Row ของ tagสีเขียว(ใช้ติดตามคะแนน)
+            const SizedBox(height: 15),
+            // Green Tag Section
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFF002F1F),
+              decoration: const BoxDecoration(
+                color: Color(0xFF002F1F),
               ),
               child: Row(
-                crossAxisAlignment:
-                    CrossAxisAlignment.center, // จัดให้อยู่กึ่งกลาง
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // ฝั่งซ้าย
+                  // Left
                   Expanded(
-                    flex: 2, // ใช้พื้นที่ 2 ส่วนจาก 3
+                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           "Getting started with Starbucks*",
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 239, 238, 238)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 239, 238, 238),
+                          ),
                         ),
                         const SizedBox(height: 8),
-
                         const Text(
                           "Rewards is easy",
                           style: TextStyle(
@@ -365,40 +387,38 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-
                         const Text(
                           "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free.",
                           style: TextStyle(
-                              fontSize: 12,
-                              height: 1.4,
-                              color: Color.fromARGB(255, 206, 204, 204)),
+                            fontSize: 12,
+                            height: 1.4,
+                            color: Color.fromARGB(255, 206, 204, 204),
+                          ),
                         ),
                         const SizedBox(height: 16),
-
-                        // ปุ่ม Join Now ที่ปรับขนาดแล้ว
                         SizedBox(
-                          width: 110, height: 40, // กำหนดความกว้างให้เล็กลง
+                          width: 110,
+                          height: 40,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12), // ลด padding แนวตั้ง
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
                             onPressed: () async {
                               await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const JoinNowScreen()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const JoinNowScreen(),
+                                ),
+                              );
                             },
                             child: const Text(
                               "Join Now",
                               style: TextStyle(
-                                fontSize: 16, // ลดขนาดฟอนต์
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
@@ -408,35 +428,31 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  // ฝั่งขวา - รูปภาพ
+                  // Right - Image
                   Expanded(
-                    flex: 1, // ใช้พื้นที่ 1 ส่วนจาก 3
+                    flex: 1,
                     child: Container(
                       alignment: Alignment.center,
                       child: Image.asset(
-                        'assets/images/reward.png', // เปลี่ยนเป็น path ของรูปคุณ
+                        'assets/images/reward.png',
                         fit: BoxFit.contain,
-                        height: 120, // กำหนดความสูงของรูป
+                        height: 120,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            //ส่วนของNew&Promotion
             _buildNewsPromotionSection(),
           ],
-          //Children
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(), // ใช้ Widget จากไฟล์แยก
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
 
-//-------------PromotionItem---------------------
-
+// PromotionItem class
 class PromotionItem {
   final String id;
   final String title;

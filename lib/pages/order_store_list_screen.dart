@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:starbucks_app/data/mock_store_service.dart';
+import 'package:starbucks_app/pages/widgets/order_map_screen.dart';
 
 class StoreListScreen extends StatefulWidget {
   const StoreListScreen({super.key});
@@ -80,8 +81,13 @@ class _StoreListScreenState extends State<StoreListScreen> {
                   subtitle: Text('${store.address}\n${store.distance}'),
                   isThreeLine: true,
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('เลือกสาขา: ${store.name}')),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderMapScreen(
+                          address: store, // ส่ง store ไปในพารามิเตอร์ address
+                        ),
+                      ),
                     );
                   },
                 );
