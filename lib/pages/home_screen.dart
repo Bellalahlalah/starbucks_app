@@ -38,17 +38,17 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
         children: [
-          Icon(icon, size: 30),
-          const SizedBox(height: 8),
+          Icon(icon, size: 22, color: color.withOpacity(0.4)),
+          const SizedBox(width: 8),
           Text(
             text,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
             ),
           ),
         ],
@@ -228,11 +228,158 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // Reward Carousel with Progress Bar
+  Widget _buildRewardCarousel(BuildContext context) {
+    final List<_RewardMilestone> _milestones = [
+      _RewardMilestone(
+        point: 20,
+        title: 'A Free Upsize on Your Drink',
+        description:
+            'Get a free upsize on your favorite drink (Tall/Grande size).',
+        imagePath: 'assets/images/green1.png',
+      ),
+      _RewardMilestone(
+        point: 60,
+        title: '25% Off on Food/Drink',
+        description:
+            'Get 25% off on a regular-priced handcrafted drink or food item.',
+        imagePath: 'assets/images/green2.png',
+      ),
+      _RewardMilestone(
+        point: 120,
+        title: '50% Off on Your Purchase',
+        description: 'Get 50% off up to 600 Baht/bill.',
+        imagePath: 'assets/images/green3.png',
+      ),
+      _RewardMilestone(
+        point: 160,
+        title: '4 Free Drinks on Us',
+        description:
+            'Get 4 free handcrafted drinks with 2 customizations per drink/bill.',
+        imagePath: 'assets/images/green4.png',
+      ),
+      _RewardMilestone(
+        point: 350,
+        title: 'Special Reward',
+        description: 'Enjoy a special reward at 350 stars!',
+        imagePath: 'assets/images/green5.png',
+      ),
+    ];
+
+    final PageController _pageController = PageController();
+    final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 180,
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: _milestones.length,
+            onPageChanged: (index) => _currentPage.value = index,
+            itemBuilder: (context, index) {
+              final item = _milestones[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF174C3A),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      // Left: Text
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Green 0★',
+                              style: const TextStyle(
+                                color: Color(0xFFB6FFB0),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              'Stars earned to redeem rewards',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              item.title,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              item.description,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                'Earn ${item.point} ★ to unlock the reward',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Right: Image
+                      Expanded(
+                        flex: 1,
+                        child: Image.asset(
+                          item.imagePath,
+                          height: 80,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 18),
+        ValueListenableBuilder<int>(
+          valueListenable: _currentPage,
+          builder: (context, page, _) {
+            return _RewardProgressBar(
+              milestones: _milestones.map((e) => e.point).toList(),
+              currentIndex: page,
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final userService = Get.find<UserService>();
-    final user = userService.currentUser.value;
-    final isLoggedIn = user != null;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -270,16 +417,17 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
-              child: Obx(() {
-                final user = userService.currentUser.value;
-                final isLoggedIn = user != null;
-                return isLoggedIn
+      body: Obx(() {
+        final user = userService.currentUser.value;
+        final isLoggedIn = user != null;
+
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
+                child: isLoggedIn
                     ? Text(
                         '${_getGreeting()},\n${user.name}',
                         style: const TextStyle(
@@ -295,158 +443,165 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
-                      );
-              }),
-            ),
-            // Find a store menu
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
+                      ),
+              ),
+              // Find a store menu
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    _buildMenuButton(
+                      icon: Icons.location_on_outlined,
+                      color: Colors.grey,
+                      text: "Find a store",
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'address');
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              const Divider(
+                height: 12,
+                color: Color.fromARGB(255, 247, 250, 252),
+                thickness: 5,
+              ),
+              const SizedBox(height: 15),
+              // 4 Circle Menus
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildMenuButton(
-                    icon: Icons.location_on_outlined,
-                    color: Colors.white,
-                    text: "Find a store",
-                    onPressed: () {
+                  _buildCircleMenuButton(
+                    icon: Icons.credit_card,
+                    label: 'Pay in\nstore',
+                    onTap: () {},
+                  ),
+                  _buildCircleMenuButton(
+                    icon: Icons.delivery_dining,
+                    label: 'Delivery\n',
+                    onTap: () {
                       Navigator.pushNamed(context, 'address');
+                    },
+                  ),
+                  _buildCircleMenuButton(
+                    icon: Icons.store,
+                    label: 'In-store\nPickup',
+                    onTap: () {
+                      Navigator.pushNamed(context, 'stores');
+                    },
+                  ),
+                  _buildCircleMenuButton(
+                    icon: Icons.table_restaurant,
+                    label: 'Order to\nTable',
+                    onTap: () {
+                      Navigator.pushNamed(context, 'scanqr');
                     },
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 15),
-            const Divider(
-              height: 12,
-              color: Color.fromARGB(255, 247, 250, 252),
-              thickness: 5,
-            ),
-            const SizedBox(height: 15),
-            // 4 Circle Menus
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildCircleMenuButton(
-                  icon: Icons.credit_card,
-                  label: 'Pay in\nstore',
-                  onTap: () {},
-                ),
-                _buildCircleMenuButton(
-                  icon: Icons.delivery_dining,
-                  label: 'Delivery\n',
-                  onTap: () {
-                    Navigator.pushNamed(context, 'address');
-                  },
-                ),
-                _buildCircleMenuButton(
-                  icon: Icons.store,
-                  label: 'In-store\nPickup',
-                  onTap: () {
-                    Navigator.pushNamed(context, 'stores');
-                  },
-                ),
-                _buildCircleMenuButton(
-                  icon: Icons.table_restaurant,
-                  label: 'Order to\nTable',
-                  onTap: () {
-                    Navigator.pushNamed(context, 'scanqr');
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            // Green Tag Section
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF002F1F),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Left
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Getting started with Starbucks*",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 239, 238, 238),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          "Rewards is easy",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 228, 227, 227),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free.",
-                          style: TextStyle(
-                            fontSize: 12,
-                            height: 1.4,
-                            color: Color.fromARGB(255, 206, 204, 204),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          width: 110,
-                          height: 40,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            onPressed: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const JoinNowScreen(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              "Join Now",
+              const SizedBox(height: 15),
+              // Green Tag Section หรือ Carousel
+              if (!isLoggedIn) ...[
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF002F1F),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Left
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Getting started with Starbucks*",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0),
+                                color: Color.fromARGB(255, 239, 238, 238),
                               ),
                             ),
+                            const SizedBox(height: 8),
+                            const Text(
+                              "Rewards is easy",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 228, 227, 227),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Text(
+                              "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free.",
+                              style: TextStyle(
+                                fontSize: 12,
+                                height: 1.4,
+                                color: Color.fromARGB(255, 206, 204, 204),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: 110,
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const JoinNowScreen(),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  "Join Now",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Right - Image
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            'assets/images/reward.png',
+                            fit: BoxFit.contain,
+                            height: 120,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  // Right - Image
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/images/reward.png',
-                        fit: BoxFit.contain,
-                        height: 120,
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            _buildNewsPromotionSection(),
-          ],
-        ),
-      ),
+                ),
+              ] else ...[
+                _buildRewardCarousel(context),
+                const SizedBox(height: 15),
+              ],
+              _buildNewsPromotionSection(),
+            ],
+          ),
+        );
+      }),
       bottomNavigationBar: const BottomNavBar(),
     );
   }
@@ -467,4 +622,104 @@ class PromotionItem {
     required this.imagePath,
     required this.isNew,
   });
+}
+
+//Class for Green Status Items
+class GreenStatusItem {
+  final String title;
+  final String subtitle;
+  final String? description;
+  final String? imagePath;
+
+  GreenStatusItem({
+    required this.title,
+    required this.subtitle,
+    this.description,
+    this.imagePath,
+  });
+}
+
+class _RewardMilestone {
+  final int point;
+  final String title;
+  final String description;
+  final String imagePath;
+
+  _RewardMilestone({
+    required this.point,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+  });
+}
+
+// Custom Progress Bar Widget
+class _RewardProgressBar extends StatelessWidget {
+  final List<int> milestones;
+  final int currentIndex;
+
+  const _RewardProgressBar({
+    required this.milestones,
+    required this.currentIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 48,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          // Main line
+          Positioned.fill(
+            top: 22,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              height: 4,
+              color: Colors.white.withOpacity(0.25),
+            ),
+          ),
+          // Milestone dots
+          Positioned.fill(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(milestones.length, (i) {
+                final isActive = i == currentIndex;
+                return Column(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      width: isActive ? 24 : 16,
+                      height: isActive ? 24 : 16,
+                      decoration: BoxDecoration(
+                        color: isActive
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isActive ? Colors.green : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          milestones[i].toString(),
+                          style: TextStyle(
+                            color: isActive ? Colors.green : Colors.black54,
+                            fontWeight: FontWeight.bold,
+                            fontSize: isActive ? 13 : 11,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                  ],
+                );
+              }),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starbucks_app/pages/sign_in.dart';
 
 class JoinNowScreen extends StatefulWidget {
   const JoinNowScreen({super.key});
@@ -24,8 +25,15 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pop(context, 'sign_in');
+            onPressed: () async {
+              //ไปหน้า sign in
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignInScreen()),
+              );
+              if (result == true) {
+                setState(() {});
+              }
             },
             child: const Text('Sign in',
                 style: TextStyle(
