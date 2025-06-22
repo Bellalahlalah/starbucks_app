@@ -63,28 +63,33 @@ class _InboxScreenState extends State<InboxScreen> {
         preferredSize: const Size.fromHeight(80),
         child: SafeArea(
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 0),
-            child: Row(
+            padding: const EdgeInsets.only(left: 24, right: 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Inbox',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Edit',
-                    style: TextStyle(
-                      color: Color(0xFF00704A),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    const Text(
+                      'Inbox',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Edit',
+                        style: TextStyle(
+                          color: Color(0xFF00704A),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

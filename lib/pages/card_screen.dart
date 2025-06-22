@@ -26,25 +26,25 @@ class CardScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
               Center(
                 child: Column(
                   children: [
-                    Image.asset('assets/images/starbucks_welcome.png',
-                        height: 80),
-                    const SizedBox(height: 32),
                     const Text(
                       'Welcome to Starbucks® Rewards',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 16),
                     const Text(
                       'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.',
-                      style: TextStyle(fontSize: 16, color: Colors.black54),
-                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13, color: Colors.black),
+                      textAlign: TextAlign.left,
                     ),
+                    const SizedBox(height: 32),
+                    Image.asset('assets/images/starbucks_welcome.png',
+                        height: 100),
                   ],
                 ),
               ),
@@ -107,7 +107,7 @@ class CardScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 18),
             ],
           ),
         ),
