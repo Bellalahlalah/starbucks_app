@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:starbucks_app/pages/join_now.dart';
+import 'package:starbucks_app/pages/pay_in_store_screen.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
 import 'package:starbucks_app/service/user_service.dart';
 
@@ -475,7 +476,12 @@ class HomeScreen extends StatelessWidget {
                   _buildCircleMenuButton(
                     icon: Icons.credit_card,
                     label: 'Pay in\nstore',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PayInStoreScreen()));
+                    },
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.delivery_dining,

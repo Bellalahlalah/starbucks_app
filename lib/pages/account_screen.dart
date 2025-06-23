@@ -27,6 +27,7 @@ class _AccountScreenState extends State<AccountScreen> {
     final user = userService.currentUser.value;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -84,7 +85,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           child: const Text(
                             'Sign in',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                         ),
                       ),
@@ -108,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           child: const Text(
                             'Join now',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                         ),
                       ),
