@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:starbucks_app/pages/sign_in.dart';
 
 class JoinNowScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
                 setState(() {});
               }
             },
-            child: const Text('Sign in',
+            child: Text('Sign in'.tr,
                 style: TextStyle(
                     color: Color(0xFF00704A), fontWeight: FontWeight.bold)),
           ),
@@ -48,10 +49,10 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            const Text('Join now',
+            Text('Join now'.tr,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
             const SizedBox(height: 24),
-            const Text('Enter your email', style: TextStyle(fontSize: 16)),
+            Text('Enter your email'.tr, style: TextStyle(fontSize: 16)),
             const SizedBox(height: 12),
             TextField(
               controller: _emailController,
@@ -62,7 +63,7 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
                 });
               },
               decoration: InputDecoration(
-                hintText: 'Email',
+                hintText: 'Email'.tr,
                 hintStyle: const TextStyle(color: Colors.grey),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -79,8 +80,8 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              'A verification link will be sent to this email',
+            Text(
+              'A verification link will be sent to this email'.tr,
               style: TextStyle(color: Colors.black54),
             ),
             const Spacer(),
@@ -102,7 +103,7 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
                         });
                       }
                     : null,
-                child: const Text('Join now',
+                child: Text('Join now'.tr,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               ),
@@ -111,7 +112,8 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
             if (_submitted)
               Center(
                 child: Text(
-                  'A verification link will be sent to ${_emailController.text}',
+                  'A verification link will be sent to ${_emailController.text}'
+                      .tr,
                   style: const TextStyle(color: Colors.green, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),

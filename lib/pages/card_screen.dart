@@ -30,15 +30,16 @@ class CardScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    const Text(
-                      'Welcome to Starbucks® Rewards',
+                    Text(
+                      'Welcome to Starbucks® Rewards'.tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.',
+                    Text(
+                      'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.'
+                          .tr,
                       style: TextStyle(fontSize: 13, color: Colors.black),
                       textAlign: TextAlign.left,
                     ),
@@ -71,7 +72,7 @@ class CardScreen extends StatelessWidget {
                           (context as Element).markNeedsBuild();
                         }
                       },
-                      child: const Text('Sign in',
+                      child: Text('Sign in'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
@@ -100,7 +101,7 @@ class CardScreen extends StatelessWidget {
                           );
                         }
                       },
-                      child: const Text('Join now',
+                      child: Text('Join now'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
@@ -173,8 +174,8 @@ class CardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'CARD BALANCE',
+                Text(
+                  'CARD BALANCE'.tr,
                   style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -204,8 +205,8 @@ class CardScreen extends StatelessWidget {
                             horizontal: 18, vertical: 0),
                       ),
                       onPressed: () {},
-                      child: const Text(
-                        'Manage',
+                      child: Text(
+                        'Manage'.tr,
                         style: TextStyle(
                           color: Color(0xFF1E3932),
                           fontWeight: FontWeight.bold,
@@ -215,8 +216,8 @@ class CardScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'As of 10 Jun 2025 07:02',
+                Text(
+                  'As of 10 Jun 2025 07:02'.tr,
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
@@ -244,9 +245,9 @@ class CardScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Center(
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
-                        'View all cards',
+                        'View all cards'.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -267,8 +268,8 @@ class CardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'YOUR BENEFIT(S)',
+                Text(
+                  'YOUR BENEFIT(S)'.tr,
                   style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -278,11 +279,11 @@ class CardScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 Center(
                   child: Column(
-                    children: const [
+                    children: [
                       Icon(Icons.star, size: 48, color: Colors.black26),
                       SizedBox(height: 8),
                       Text(
-                        'You have no Benefits available',
+                        'You have no Benefits available'.tr,
                         style: TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.normal,

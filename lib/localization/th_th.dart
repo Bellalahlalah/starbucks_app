@@ -27,15 +27,83 @@ final Map<String, String> thTH = {
   'search': 'ค้นหา',
   'inbox': 'ข้อความ',
   'card': 'บัตร',
-  'Pay in store': 'ชำระเงินที่ร้าน',
   'delivery': 'จัดส่ง',
+  'Sign in': 'เข้าสู่ระบบ',
+  'Join now': 'เข้าร่วมตอนนี้',
+
+  //sign in page
+  'Email or password is incorrect': 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+  'Email': 'อีเมล',
+  'Password': 'รหัสผ่าน',
+  'Show': 'แสดง',
+  'Hide': 'ซ่อน',
+  'Forgot password?': 'ลืมรหัสผ่าน?',
+  'Stay signed in': 'อยู่ในระบบต่อไป',
+
+  // Join Now Page
+  'Enter your email': 'กรอกอีเมลของคุณ',
+  'A verification link will be sent to this email':
+      'ลิงก์ยืนยันจะถูกส่งไปยังอีเมลนี้',
+  'A verification link will be sent to': 'ลิงก์ยืนยันจะถูกส่งไปยัง',
+
+  // Home Page
+  'It\'s a great day for coffee': 'เริ่มต้นวันใหม่ด้วยกาแฟ',
+  'Find your favorite drinks and food': 'ค้นหาเครื่องดื่มและอาหารที่',
+  'Find a store': 'ค้นหาร้าน',
+  'Pay in\nstore': 'ชำระเงินที่ร้าน',
+  'Delivery\n': 'จัดส่งถึงบ้าน',
+  'In-store\nPickup': 'รับที่ร้าน',
+  'Order to\nTable': 'สั่งที่โต๊ะ',
+  "Getting started with Starbucks": 'เริ่มต้นกับ Starbucks*',
+  "Rewards is easy": 'สะสมคะแนนได้ง่ายๆ',
+  "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free.":
+      'สั่งซื้อได้ง่ายๆ สะสมดาวจากทุกการซื้อและรับของโปรดฟรี',
+  "Join Now": 'เข้าร่วมตอนนี้',
+  'NEWS & PROMOTION': 'ข่าวสารและโปรโมชั่น',
+
+  // Card Page
+  'Welcome to Starbucks® Rewards': 'ยินดีต้อนรับสู่ Starbucks® Rewards',
+  'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.':
+      'เพลิดเพลินกับประสบการณ์การชำระเงินที่สะดวกสบายและการสั่งซื้อที่ง่ายดายผ่านแอป Starbucks® TH เพียงเข้าร่วม Starbucks® Rewards และปลดล็อกสิทธิพิเศษเฉพาะสมาชิก',
+  'CARD BALANCE': 'ยอดคงเหลือในบัตร',
+  'Manage': 'จัดการ',
+  'As of 10 Jun 2025 07:02': 'วันที่ 10 มิ.ย. 2025 07:02',
+  'View all cards': 'ดูบัตรทั้งหมด',
+  'YOUR BENEFIT(S)': 'สิทธิประโยชน์ของคุณ',
+  'You have no Benefits available': 'คุณไม่มีสิทธิประโยชน์ที่ใช้ได้',
 
   //Order Page
+  'Say hello to easy ordering, tasty Rewards and get your favorites for free.':
+      'สั่งซื้อได้ง่ายๆ สะสมดาวจากทุกการซื้อและรับของโปรดฟรี',
   'Deliver': 'จัดส่ง',
   'Find your favorite Starbucks': 'ค้นหาร้าน Starbucks',
   'In-store Pickup': 'รับที่ร้าน',
   'choose a Starbucks near you': 'เลือกร้าน Starbucks ใกล้คุณ',
   'Order to Table': 'สั่งที่โต๊ะ',
   'Scan Qr code at the table to order': 'สแกน QR โค้ดที่โต๊ะเพื่อสั่งซื้อ',
-  // เพิ่ม key อื่นๆ ตามต้องการ
+  // Inbox Page
+  'Inbox': 'กล่องข้อความ',
+  'Edit': 'แก้ไข',
+
+  //Account Page
+  'ACCOUNT DETAILS': 'รายละเอียดบัญชี',
+  'My credit / debit cards': 'บัตรเครดิต / บัตรเดบิตของฉัน',
+  'Delivery address': 'ที่อยู่จัดส่ง',
+  'Personal information': 'ข้อมูลส่วนตัว',
+  'Starbucks® Rewards': 'รางวัล Starbucks®',
+  'SETTINGS': 'การตั้งค่า',
+  'General': 'ทั่วไป',
+  'Security': 'ความปลอดภัย',
+  'Language': 'ภาษา',
+  'ABOUT': 'เกี่ยวกับ',
+  'FAQs': 'คำถามที่พบบ่อย',
+  'Terms of use': 'เงื่อนไขการใช้งาน',
+  'Privacy policy': 'นโยบายความเป็นส่วนตัว',
+  'Feedback': 'ข้อเสนอแนะแนวทาง',
+  'Tell a friend': 'บอกเพื่อน',
+  'Delete account': 'ลบบัญชี',
+  'Sign out': 'ออกจากระบบ',
+  'App version 7.2.4': 'เวอร์ชันแอป 7.2.4',
+  'Sign me out': 'ออกจากระบบ',
+  'Are you sure you want to sign out?': 'คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?',
 };

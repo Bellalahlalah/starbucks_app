@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
 
 class InboxScreen extends StatefulWidget {
@@ -70,8 +71,8 @@ class _InboxScreenState extends State<InboxScreen> {
                 const SizedBox(height: 32),
                 Row(
                   children: [
-                    const Text(
-                      'Inbox',
+                    Text(
+                      'Inbox'.tr,
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -80,8 +81,8 @@ class _InboxScreenState extends State<InboxScreen> {
                     const Spacer(),
                     TextButton(
                       onPressed: () {},
-                      child: const Text(
-                        'Edit',
+                      child: Text(
+                        'Edit'.tr,
                         style: TextStyle(
                           color: Color(0xFF00704A),
                           fontWeight: FontWeight.bold,

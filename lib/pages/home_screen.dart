@@ -116,11 +116,11 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Text(
-            'NEWS & PROMOTION',
-            style: TextStyle(
+            'NEWS & PROMOTION'.tr,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -403,8 +403,8 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, 'signin');
                         },
-                        child: const Text(
-                          'Sign in',
+                        child: Text(
+                          'Sign in'.tr,
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: 16,
@@ -437,8 +437,8 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.black,
                         ),
                       )
-                    : const Text(
-                        "It's a great day for coffee",
+                    : Text(
+                        "It's a great day for coffee".tr,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -454,7 +454,7 @@ class HomeScreen extends StatelessWidget {
                     _buildMenuButton(
                       icon: Icons.location_on_outlined,
                       color: Colors.grey,
-                      text: "Find a store",
+                      text: "Find a store".tr,
                       onPressed: () {
                         Navigator.pushNamed(context, 'address');
                       },
@@ -475,7 +475,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _buildCircleMenuButton(
                     icon: Icons.credit_card,
-                    label: 'Pay in\nstore',
+                    label: 'Pay in\nstore'.tr,
                     onTap: () {
                       Navigator.push(
                           context,
@@ -485,21 +485,21 @@ class HomeScreen extends StatelessWidget {
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.delivery_dining,
-                    label: 'Delivery\n',
+                    label: 'Delivery\n'.tr,
                     onTap: () {
                       Navigator.pushNamed(context, 'address');
                     },
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.store,
-                    label: 'In-store\nPickup',
+                    label: 'In-store\nPickup'.tr,
                     onTap: () {
                       Navigator.pushNamed(context, 'stores');
                     },
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.table_restaurant,
-                    label: 'Order to\nTable',
+                    label: 'Order to\nTable'.tr,
                     onTap: () {
                       Navigator.pushNamed(context, 'scanqr');
                     },
@@ -523,8 +523,8 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Getting started with Starbucks*",
+                            Text(
+                              "Getting started with Starbucks".tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -532,8 +532,8 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Text(
-                              "Rewards is easy",
+                            Text(
+                              "Rewards is easy".tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -541,8 +541,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Text(
-                              "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free.",
+                            Text(
+                              "Say hello to easy ordering, collect Stars on everything you buy and get your favorites for free."
+                                  .tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 height: 1.4,
@@ -571,8 +572,8 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: const Text(
-                                  "Join Now",
+                                child: Text(
+                                  "Join Now".tr,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

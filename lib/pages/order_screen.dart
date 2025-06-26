@@ -32,15 +32,16 @@ class OrderScreen extends StatelessWidget {
                   children: [
                     Image.asset('assets/images/ordertwocups.png', height: 80),
                     const SizedBox(height: 32),
-                    const Text(
-                      'Welcome to Starbucks® Rewards',
+                    Text(
+                      'Welcome to Starbucks® Rewards'.tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Say hello to easy ordering, tasty Rewards and get your favorites for free.',
+                    Text(
+                      'Say hello to easy ordering, tasty Rewards and get your favorites for free.'
+                          .tr,
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       textAlign: TextAlign.center,
                     ),
@@ -70,7 +71,7 @@ class OrderScreen extends StatelessWidget {
                           (context as Element).markNeedsBuild();
                         }
                       },
-                      child: const Text('Join now',
+                      child: Text('Join now'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
@@ -99,7 +100,7 @@ class OrderScreen extends StatelessWidget {
                           );
                         }
                       },
-                      child: const Text('Sign in',
+                      child: Text('Sign in'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                     ),

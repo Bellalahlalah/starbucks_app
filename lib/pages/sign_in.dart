@@ -49,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
       Navigator.pop(context, true); // ส่ง true กลับไปเพื่อ refresh
     } else {
       setState(() {
-        _errorText = 'Email or password is incorrect';
+        _errorText = 'Email or password is incorrect'.tr;
       });
     }
   }
@@ -84,8 +84,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           builder: (context) => const JoinNowScreen()),
                     );
                   },
-                  child: const Text(
-                    'Join now',
+                  child: Text(
+                    'Join now'.tr,
                     style: TextStyle(
                       color: Colors.green,
                       fontSize: 16,
@@ -103,10 +103,10 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 20, bottom: 30),
               child: Text(
-                'Sign in',
+                'Sign in'.tr,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: 'Email'.tr,
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -126,11 +126,11 @@ class _SignInScreenState extends State<SignInScreen> {
               controller: _passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Password'.tr,
                 border: const OutlineInputBorder(),
                 suffixIcon: TextButton(
                   child: Text(
-                    _obscureText ? 'Show' : 'Hide',
+                    _obscureText ? 'Show'.tr : 'Hide'.tr,
                     style: const TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -162,8 +162,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {},
-                      child: const Text(
-                        'Forgot password?',
+                      child: Text(
+                        'Forgot password?'.tr,
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
@@ -173,8 +173,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Row(
                       children: [
-                        const Text(
-                          'Stay signed in',
+                        Text(
+                          'Stay signed in'.tr,
                           style: TextStyle(fontSize: 16),
                         ),
                         Switch(
@@ -201,8 +201,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 onPressed: _isFormValid ? _signIn : null,
-                child: const Text(
-                  'Sign in',
+                child: Text(
+                  'Sign in'.tr,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

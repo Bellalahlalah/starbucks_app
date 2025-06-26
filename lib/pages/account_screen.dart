@@ -50,8 +50,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           style: const TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold),
                         )
-                      : const Text(
-                          'Account',
+                      : Text(
+                          'Account'.tr,
                           style: TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold),
                         ),
@@ -82,8 +82,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               setState(() {});
                             }
                           },
-                          child: const Text(
-                            'Sign in',
+                          child: Text(
+                            'Sign in'.tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
@@ -106,8 +106,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                   builder: (context) => const JoinNowScreen()),
                             );
                           },
-                          child: const Text(
-                            'Join now',
+                          child: Text(
+                            'Join now'.tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
@@ -120,29 +120,29 @@ class _AccountScreenState extends State<AccountScreen> {
                 // เมนูเมื่อ sign in
                 if (isLoggedIn) ...[
                   const SizedBox(height: 24),
-                  _sectionTitle('ACCOUNT DETAILS'),
+                  _sectionTitle('ACCOUNT DETAILS'.tr),
                   _accountMenu(
                     title: 'Your mobile order(s)',
                     icon: Icons.receipt_long,
                     onTap: () {},
                   ),
                   _accountMenu(
-                    title: 'My credit / debit cards',
+                    title: 'My credit / debit cards'.tr,
                     icon: Icons.credit_card,
                     onTap: () {},
                   ),
                   _accountMenu(
-                    title: 'Delivery address',
+                    title: 'Delivery address'.tr,
                     icon: Icons.location_on,
                     onTap: () {},
                   ),
                   _accountMenu(
-                    title: 'Personal information',
+                    title: 'Personal information'.tr,
                     icon: Icons.person,
                     onTap: () {},
                   ),
                   _accountMenu(
-                    title: 'Starbucks® Rewards',
+                    title: 'Starbucks® Rewards'.tr,
                     icon: Icons.star,
                     onTap: () {},
                   ),
@@ -151,20 +151,20 @@ class _AccountScreenState extends State<AccountScreen> {
                 ],
 
                 // SETTINGS
-                _sectionTitle('SETTINGS'),
+                _sectionTitle('SETTINGS'.tr),
                 _simpleMenu(
-                  title: 'General',
+                  title: 'General'.tr,
                   onTap: () {},
                 ),
                 if (isLoggedIn)
                   _simpleMenu(
-                    title: 'Security',
+                    title: 'Security'.tr,
                     onTap: () {},
                   ),
                 // Language
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0, right: 0),
-                  title: const Text('Language',
+                  title: Text('Language'.tr,
                       style: TextStyle(fontWeight: FontWeight.normal)),
                   trailing: DropdownButton<String>(
                     value: _language,
@@ -190,25 +190,25 @@ class _AccountScreenState extends State<AccountScreen> {
                 _divider(),
 
                 // ABOUT
-                _sectionTitle('ABOUT'),
+                _sectionTitle('ABOUT'.tr),
                 _simpleMenu(
-                  title: 'FAQs',
+                  title: 'FAQs'.tr,
                   onTap: () {},
                 ),
                 _simpleMenu(
-                  title: 'Terms of use',
+                  title: 'Terms of use'.tr,
                   onTap: () {},
                 ),
                 _simpleMenu(
-                  title: 'Privacy policy',
+                  title: 'Privacy policy'.tr,
                   onTap: () {},
                 ),
                 _simpleMenu(
-                  title: 'Feedback',
+                  title: 'Feedback'.tr,
                   onTap: () {},
                 ),
                 _simpleMenu(
-                  title: 'Tell a friend',
+                  title: 'Tell a friend'.tr,
                   onTap: () {},
                 ),
                 if (isLoggedIn) ...[
@@ -219,8 +219,8 @@ class _AccountScreenState extends State<AccountScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 0, right: 0),
-                      title: const Text(
-                        'Delete account',
+                      title: Text(
+                        'Delete account'.tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
                       ),
@@ -268,8 +268,8 @@ class _AccountScreenState extends State<AccountScreen> {
                             setState(() {});
                           }
                         },
-                        child: const Text(
-                          'Sign out',
+                        child: Text(
+                          'Sign out'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
@@ -277,10 +277,10 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'App version 7.2.4',
+                      'App version 7.2.4'.tr,
                       style: TextStyle(
                           color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
                     ),
@@ -289,12 +289,12 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
             ),
           if (!isLoggedIn)
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(24, 0, 24, 24),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'App version 7.2.4',
+                  'App version 7.2.4'.tr,
                   style: TextStyle(
                       color: Colors.grey, fontSize: 13, letterSpacing: 0.2),
                 ),
@@ -364,13 +364,13 @@ class _AccountScreenState extends State<AccountScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Sign me out',
+            Text(
+              'Sign me out'.tr,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Are you sure you want to sign out?',
+            Text(
+              'Are you sure you want to sign out?'.tr,
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
@@ -390,8 +390,8 @@ class _AccountScreenState extends State<AccountScreen> {
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
-                    child: const Text(
-                      'Sign out',
+                    child: Text(
+                      'Sign out'.tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
@@ -410,8 +410,8 @@ class _AccountScreenState extends State<AccountScreen> {
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: const Text(
-                      'Not now',
+                    child: Text(
+                      'Not now'.tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
