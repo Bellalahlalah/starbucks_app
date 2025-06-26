@@ -19,16 +19,28 @@ class BottomNavBar extends StatelessWidget {
           onTap: controller.changeTab,
           selectedItemColor: Colors.green,
           unselectedItemColor: const Color.fromARGB(255, 136, 136, 136),
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+          selectedLabelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).textTheme.titleLarge?.color,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontWeight: FontWeight.normal,
+            color: Theme.of(context).textTheme.titleLarge?.color,
+          ),
           items: [
             BottomNavigationBarItem(
               icon: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(Icons.home_outlined),
                   SizedBox(height: 1),
-                  Text('Home', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               activeIcon: Column(
@@ -48,10 +60,16 @@ class BottomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(Icons.credit_card_outlined),
                   SizedBox(height: 1),
-                  Text('Card', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'Card',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               activeIcon: Column(
@@ -71,10 +89,16 @@ class BottomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(Icons.local_cafe_outlined),
                   SizedBox(height: 1),
-                  Text('Order', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'Order',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               activeIcon: Column(
@@ -94,10 +118,16 @@ class BottomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(Icons.mail_outline),
                   SizedBox(height: 1),
-                  Text('Inbox', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'Inbox',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               activeIcon: Column(
@@ -117,10 +147,16 @@ class BottomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(Icons.person_outline),
                   SizedBox(height: 1),
-                  Text('Account', style: TextStyle(fontSize: 14)),
+                  Text(
+                    'Account',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
+                  ),
                 ],
               ),
               activeIcon: Column(

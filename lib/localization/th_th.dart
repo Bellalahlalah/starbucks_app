@@ -71,6 +71,10 @@ final Map<String, String> thTH = {
   'View all cards': 'ดูบัตรทั้งหมด',
   'YOUR BENEFIT(S)': 'สิทธิประโยชน์ของคุณ',
   'You have no Benefits available': 'คุณไม่มีสิทธิประโยชน์ที่ใช้ได้',
+  'Add card': 'เพิ่มบัตร',
+  'Add money': 'เพิ่มเงิน',
+  'Transfer': 'โอนเงิน',
+  'Pay in store': 'ชำระเงินที่ร้าน',
 
   //Order Page
   'Say hello to easy ordering, tasty Rewards and get your favorites for free.':
@@ -81,12 +85,27 @@ final Map<String, String> thTH = {
   'choose a Starbucks near you': 'เลือกร้าน Starbucks ใกล้คุณ',
   'Order to Table': 'สั่งที่โต๊ะ',
   'Scan Qr code at the table to order': 'สแกน QR โค้ดที่โต๊ะเพื่อสั่งซื้อ',
+
   // Inbox Page
   'Inbox': 'กล่องข้อความ',
   'Edit': 'แก้ไข',
+  'Enjoy Starbucks beverages – only 140 Baht!':
+      'เพลิดเพลินกับเครื่องดื่ม Starbucks – เพียง 140 บาท!',
+  '09 Jun 2025': '09 มิ.ย. 2025',
+  'Refresh Alert': 'แจ้งเตือนการรีเฟรช',
+  '04 Jun 2025': '04 มิ.ย. 2025',
+  'Earn Double Stars': 'รับดาวสองเท่า',
+  'Earn 7 Bonus Stars': 'รับโบนัสดาว 7 ดวง',
+  '26 May 2025': '26 พ.ค. 2025',
+  'Happy Specials! Only 125 Baht': 'โปรโมชั่นพิเศษ! เพียง 125 บาท',
+  '19 May 2025': '19 พ.ค. 2025',
+  'Get 1 Bonus Star': 'รับโบนัสดาว 1 ดวง',
+  '15 May 2025': '15 พ.ค. 2025',
+  '28 Apr 2025': '28 เม.ย. 2025',
 
   //Account Page
   'ACCOUNT DETAILS': 'รายละเอียดบัญชี',
+  'Your mobile order(s)': 'คำสั่งซื้อของคุณ',
   'My credit / debit cards': 'บัตรเครดิต / บัตรเดบิตของฉัน',
   'Delivery address': 'ที่อยู่จัดส่ง',
   'Personal information': 'ข้อมูลส่วนตัว',
@@ -106,4 +125,19 @@ final Map<String, String> thTH = {
   'App version 7.2.4': 'เวอร์ชันแอป 7.2.4',
   'Sign me out': 'ออกจากระบบ',
   'Are you sure you want to sign out?': 'คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?',
+
+  //pay in store screen
+  'Pay': 'ชำระเงิน',
+  'Change': 'เปลี่ยน',
+  //'CARD BALANCE': 'ยอดคงเหลือในบัตร', มีแล้วใน Card Page
+  'As of 23 Jun 2025 19:43': 'ณ วันที่ 23 มิ.ย. 2025 19:43',
+  'Please tell a barista to redeem the reward': 'กรุณาบอกบาริสต้าก่อนใช้รางวัล',
+  //'YOUR BENEFIT(S)': 'สิทธิประโยชน์ของคุณ', มีแล้วใน Card Page
+
+  //Delivery Page
+  'Search for location': 'ค้นหาสถานที่',
+  'Enter a building or a street name': 'กรอกชื่ออาคารหรือถนน',
+  'RECENT SEARCHES': 'การค้นหาล่าสุด',
+  'Select a Store': 'เลือกสาขา',
+  'Nearby Stores': 'ร้านค้าใกล้เคียง',
 };

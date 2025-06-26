@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PayInStoreScreen extends StatelessWidget {
   const PayInStoreScreen({super.key});
@@ -11,8 +12,8 @@ class PayInStoreScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Pay',
+        title: Text(
+          'Pay'.tr,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -49,8 +50,8 @@ class PayInStoreScreen extends StatelessWidget {
                   const Spacer(),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
-                      'Change',
+                    child: Text(
+                      'Change'.tr,
                       style: TextStyle(
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
@@ -67,8 +68,8 @@ class PayInStoreScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
-                  const Text(
-                    'CARD BALANCE',
+                  Text(
+                    'CARD BALANCE'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black54,
@@ -100,9 +101,9 @@ class PayInStoreScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
-                children: const [
+                children: [
                   Text(
-                    'As of 23 Jun 2025 19:43',
+                    'As of 23 Jun 2025 19:43'.tr,
                     style: TextStyle(fontSize: 13, color: Colors.black45),
                   ),
                 ],
@@ -153,9 +154,9 @@ class PayInStoreScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 16),
                   Row(
-                    children: const [
+                    children: [
                       Text(
-                        'YOUR BENEFIT(S)',
+                        'YOUR BENEFIT(S)'.tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black54,

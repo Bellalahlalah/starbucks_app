@@ -383,9 +383,9 @@ class HomeScreen extends StatelessWidget {
     final userService = Get.find<UserService>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         toolbarHeight: 100,
         titleSpacing: 0,
@@ -442,13 +442,13 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
                         ),
                       ),
               ),
               // Find a store menu
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   children: [
                     _buildMenuButton(

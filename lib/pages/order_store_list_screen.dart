@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:starbucks_app/data/mock_store_service.dart';
 import 'package:starbucks_app/pages/widgets/order_map_screen.dart';
@@ -29,8 +30,8 @@ class _StoreListScreenState extends State<StoreListScreen> {
           },
         ),
         // title
-        title: const Text(
-          'Select a Store',
+        title: Text(
+          'Select a Store'.tr,
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF00704A),
@@ -59,12 +60,12 @@ class _StoreListScreenState extends State<StoreListScreen> {
               }).toSet(),
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Nearby Stores',
+                'Nearby Stores'.tr,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

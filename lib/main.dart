@@ -38,12 +38,23 @@ class StarbucksApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Starbucks',
           theme: ThemeData(
-            primarySwatch: Colors.green,
             brightness: Brightness.light,
+            primarySwatch: Colors.green,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             primarySwatch: Colors.green,
+            scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
+            textTheme: const TextTheme(
+              titleLarge: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              bodyMedium: TextStyle(color: Color.fromARGB(255, 5, 5, 5)),
+              bodySmall: TextStyle(color: Colors.green),
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: Colors.black,
+              selectedItemColor: Colors.green,
+              unselectedItemColor: Colors.white,
+            ),
           ),
           themeMode: themeController.themeMode.value, // เชื่อมกับ controller
           // ใช้ themeMode จาก ThemeController

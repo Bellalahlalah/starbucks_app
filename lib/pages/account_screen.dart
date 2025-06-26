@@ -27,9 +27,9 @@ class _AccountScreenState extends State<AccountScreen> {
     final user = userService.currentUser.value;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const SizedBox.shrink(),
@@ -53,7 +53,11 @@ class _AccountScreenState extends State<AccountScreen> {
                       : Text(
                           'Account'.tr,
                           style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Theme.of(context).textTheme.titleLarge?.color,
+                          ),
                         ),
                 ),
                 const SizedBox(height: 16),
@@ -122,7 +126,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   const SizedBox(height: 24),
                   _sectionTitle('ACCOUNT DETAILS'.tr),
                   _accountMenu(
-                    title: 'Your mobile order(s)',
+                    title: 'Your mobile order(s)'.tr,
                     icon: Icons.receipt_long,
                     onTap: () {},
                   ),
@@ -181,6 +185,37 @@ class _AccountScreenState extends State<AccountScreen> {
                         });
                         languageController
                             .setLanguage(value == 'English' ? 'en' : 'th');
+                      }
+                    },
+                  ),
+                  onTap: null,
+                ),
+                const SizedBox(height: 8),
+                // Theme Switcher
+                ListTile(
+                  contentPadding: const EdgeInsets.only(left: 0, right: 0),
+                  title: Text('Theme'.tr,
+                      style: const TextStyle(fontWeight: FontWeight.normal)),
+                  trailing: DropdownButton<ThemeMode>(
+                    value: themeController.themeMode.value,
+                    underline: const SizedBox(),
+                    items: const [
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
+                        child: Text('Light'),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.dark,
+                        child: Text('Dark'),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.system,
+                        child: Text('System'),
+                      ),
+                    ],
+                    onChanged: (mode) {
+                      if (mode != null) {
+                        themeController.setThemeMode(mode);
                       }
                     },
                   ),

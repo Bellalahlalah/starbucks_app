@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class OrderScanQRScreen extends StatefulWidget {
@@ -22,8 +23,8 @@ class _OrderScanQRScreenState extends State<OrderScanQRScreen> {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text(
-          'Order to Table',
+        title: Text(
+          'Order to Table'.tr,
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF00704A),

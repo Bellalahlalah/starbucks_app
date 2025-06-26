@@ -14,44 +14,44 @@ class _InboxScreenState extends State<InboxScreen> {
   final List<InboxItem> items = [
     InboxItem(
       image: 'assets/images/circlemenuinbox.png',
-      title: 'Enjoy Starbucks beverages – only 140 Baht!',
-      date: '09 Jun 2025',
+      title: 'Enjoy Starbucks beverages – only 140 Baht!'.tr,
+      date: '09 Jun 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/menuNews_1.jpg',
-      title: 'Refresh Alert',
-      date: '04 Jun 2025',
+      title: 'Refresh Alert'.tr,
+      date: '04 Jun 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/circlemenuinbox.png',
-      title: 'Earn Double Stars',
-      date: '04 Jun 2025',
+      title: 'Earn Double Stars'.tr,
+      date: '04 Jun 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/menuNews_1.jpg',
-      title: 'Earn 7 Bonus Stars',
-      date: '26 May 2025',
+      title: 'Earn 7 Bonus Stars'.tr,
+      date: '26 May 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/circlemenuinbox.png',
-      title: 'Happy Specials! Only 125 Baht',
-      date: '19 May 2025',
+      title: 'Happy Specials! Only 125 Baht'.tr,
+      date: '19 May 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/menuNews_1.jpg',
-      title: 'Get 1 Bonus Star',
-      date: '15 May 2025',
+      title: 'Get 1 Bonus Star'.tr,
+      date: '15 May 2025'.tr,
       read: false,
     ),
     InboxItem(
       image: 'assets/images/circlemenuinbox.png',
-      title: 'Earn Double Stars',
-      date: '28 Apr 2025',
+      title: 'Earn Double Stars'.tr,
+      date: '28 Apr 2025'.tr,
       read: false,
     ),
   ];
@@ -59,7 +59,7 @@ class _InboxScreenState extends State<InboxScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: SafeArea(
@@ -76,6 +76,7 @@ class _InboxScreenState extends State<InboxScreen> {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                       ),
                     ),
                     const Spacer(),
@@ -84,7 +85,7 @@ class _InboxScreenState extends State<InboxScreen> {
                       child: Text(
                         'Edit'.tr,
                         style: TextStyle(
-                          color: Color(0xFF00704A),
+                          color: Theme.of(context).textTheme.bodySmall?.color,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -108,7 +109,9 @@ class _InboxScreenState extends State<InboxScreen> {
         itemBuilder: (context, index) {
           final item = items[index];
           return Material(
-            color: item.read ? Colors.white : const Color(0xFFEAF6EF),
+            color: item.read
+                ? Theme.of(context).scaffoldBackgroundColor
+                : const Color(0xFFEAF6EF),
             child: InkWell(
               onTap: () {
                 setState(() {
@@ -138,16 +141,19 @@ class _InboxScreenState extends State<InboxScreen> {
                         children: [
                           Text(
                             item.title,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             item.date,
-                            style: const TextStyle(
-                              color: Colors.grey,
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodySmall?.color,
                               fontSize: 14,
                             ),
                           ),

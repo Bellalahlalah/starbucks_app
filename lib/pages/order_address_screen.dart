@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:starbucks_app/data/mock_address_service.dart';
 import 'package:starbucks_app/pages/widgets/order_map_screen.dart';
 
@@ -17,8 +18,8 @@ class OrderAddressScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          'Search for location',
+        title: Text(
+          'Search for location'.tr,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -33,7 +34,7 @@ class OrderAddressScreen extends StatelessWidget {
             child: TextField(
               enabled: false,
               decoration: InputDecoration(
-                hintText: 'Enter a building or a street name',
+                hintText: 'Enter a building or a street name'.tr,
                 hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
@@ -59,10 +60,10 @@ class OrderAddressScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'RECENT SEARCHES',
+              'RECENT SEARCHES'.tr,
               style: TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.bold,

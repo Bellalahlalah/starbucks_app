@@ -15,9 +15,9 @@ class OrderScreen extends StatelessWidget {
 
     if (!isLoggedIn) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: const SizedBox.shrink(),
         ),
@@ -34,15 +34,21 @@ class OrderScreen extends StatelessWidget {
                     const SizedBox(height: 32),
                     Text(
                       'Welcome to Starbucks® Rewards'.tr,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Say hello to easy ordering, tasty Rewards and get your favorites for free.'
                           .tr,
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ],

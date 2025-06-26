@@ -15,9 +15,9 @@ class CardScreen extends StatelessWidget {
 
     if (!isLoggedIn) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: const SizedBox.shrink(),
         ),
@@ -32,15 +32,21 @@ class CardScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Welcome to Starbucks® Rewards'.tr,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
+                      ),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Enjoy a cashless and convenient experience in-store and easy ordering via Starbucks® TH App. Simply join Starbucks® Rewards and unlock access to exclusive perks.'
                           .tr,
-                      style: TextStyle(fontSize: 13, color: Colors.black),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
+                      ),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 32),
@@ -160,10 +166,10 @@ class CardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _quickAction(Icons.credit_card, 'Add card'),
-                _quickAction(Icons.add, 'Add money'),
-                _quickAction(Icons.sync_alt, 'Transfer'),
-                _quickAction(Icons.local_cafe, 'Pay in store'),
+                _quickAction(Icons.credit_card, 'Add card'.tr),
+                _quickAction(Icons.add, 'Add money'.tr),
+                _quickAction(Icons.sync_alt, 'Transfer'.tr),
+                _quickAction(Icons.local_cafe, 'Pay in store'.tr),
               ],
             ),
           ),
