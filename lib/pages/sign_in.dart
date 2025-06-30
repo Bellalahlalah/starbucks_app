@@ -57,19 +57,20 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: Container(
           padding: const EdgeInsets.only(top: 48),
-          color: Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             toolbarHeight: 56,
             leading: IconButton(
-              icon:
-                  const Icon(Icons.chevron_left, size: 30, color: Colors.black),
+              icon: Icon(Icons.chevron_left,
+                  size: 30,
+                  color: Theme.of(context).textTheme.titleLarge?.color),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
@@ -110,7 +111,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                 ),
               ),
             ),
@@ -175,7 +176,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         Text(
                           'Stay signed in'.tr,
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color),
                         ),
                         Switch(
                           value: true,

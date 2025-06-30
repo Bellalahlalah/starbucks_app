@@ -62,6 +62,8 @@ class HomeScreen extends StatelessWidget {
     required IconData icon,
     required String label,
     required VoidCallback onTap,
+    // ignore: unused_element
+    Color? textColor,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -84,9 +86,10 @@ class HomeScreen extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
+              color: textColor,
             ),
           ),
         ],
@@ -120,7 +123,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Text(
             'NEWS & PROMOTION'.tr,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -451,10 +454,26 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 child: Column(
                   children: [
-                    _buildMenuButton(
-                      icon: Icons.location_on_outlined,
-                      color: Colors.grey,
-                      text: "Find a store".tr,
+                    TextButton.icon(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.transparent, // ไม่มีพื้นหลัง
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 20),
+                      ),
+                      icon:
+                          Icon(Icons.location_on_outlined, color: Colors.grey),
+                      label: Text(
+                        "Find a store".tr,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.color // เปลี่ยนสีตามต้องการ
+                            ),
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, 'address');
                       },
@@ -463,10 +482,10 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              const Divider(
-                height: 12,
-                color: Color.fromARGB(255, 247, 250, 252),
-                thickness: 5,
+              Divider(
+                height: 2,
+                color: const Color.fromARGB(255, 225, 224, 224),
+                thickness: 4,
               ),
               const SizedBox(height: 15),
               // 4 Circle Menus
@@ -482,6 +501,7 @@ class HomeScreen extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const PayInStoreScreen()));
                     },
+                    textColor: Theme.of(context).textTheme.titleLarge?.color,
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.delivery_dining,
@@ -489,6 +509,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, 'address');
                     },
+                    textColor: Theme.of(context).textTheme.titleLarge?.color,
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.store,
@@ -496,6 +517,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, 'stores');
                     },
+                    textColor: Theme.of(context).textTheme.titleLarge?.color,
                   ),
                   _buildCircleMenuButton(
                     icon: Icons.table_restaurant,
@@ -503,6 +525,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, 'scanqr');
                     },
+                    textColor: Theme.of(context).textTheme.titleLarge?.color,
                   ),
                 ],
               ),

@@ -12,19 +12,22 @@ class OrderAddressScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back,
+              color: Theme.of(context).textTheme.titleLarge?.color),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Search for location'.tr,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Theme.of(context).textTheme.titleLarge?.color,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

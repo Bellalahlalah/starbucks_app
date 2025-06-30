@@ -47,8 +47,13 @@ class _AccountScreenState extends State<AccountScreen> {
                   child: isLoggedIn
                       ? Text(
                           user!.name,
-                          style: const TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.color),
                         )
                       : Text(
                           'Account'.tr,
@@ -257,7 +262,9 @@ class _AccountScreenState extends State<AccountScreen> {
                       title: Text(
                         'Delete account'.tr,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Theme.of(context).textTheme.titleLarge?.color),
                       ),
                       trailing:
                           const Icon(Icons.chevron_right, color: Colors.grey),
