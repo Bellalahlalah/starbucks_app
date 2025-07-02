@@ -240,58 +240,52 @@ class HomeScreen extends StatelessWidget {
         title: 'A Free Upsize on Your Drink',
         description:
             'Get a free upsize on your favorite drink (Tall/Grande size).',
-        imagePath: 'assets/images/green1.png',
+        imagePath: 'assets/images/ordertwocups.png',
       ),
       _RewardMilestone(
         point: 60,
         title: '25% Off on Food/Drink',
         description:
             'Get 25% off on a regular-priced handcrafted drink or food item.',
-        imagePath: 'assets/images/green2.png',
+        imagePath: 'assets/images/ordertwocups.png',
       ),
       _RewardMilestone(
         point: 120,
         title: '50% Off on Your Purchase',
         description: 'Get 50% off up to 600 Baht/bill.',
-        imagePath: 'assets/images/green3.png',
+        imagePath: 'assets/images/ordertwocups.png',
       ),
       _RewardMilestone(
         point: 160,
         title: '4 Free Drinks on Us',
         description:
             'Get 4 free handcrafted drinks with 2 customizations per drink/bill.',
-        imagePath: 'assets/images/green4.png',
+        imagePath: 'assets/images/ordertwocups.png',
       ),
       _RewardMilestone(
         point: 350,
         title: 'Special Reward',
         description: 'Enjoy a special reward at 350 stars!',
-        imagePath: 'assets/images/green5.png',
+        imagePath: 'assets/images/ordertwocups.png',
       ),
     ];
 
-    final PageController _pageController = PageController();
-    final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
+    final ValueNotifier<int> selectedIndex = ValueNotifier<int>(0);
 
-    return Column(
-      children: [
-        SizedBox(
-          height: 180,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: _milestones.length,
-            onPageChanged: (index) => _currentPage.value = index,
-            itemBuilder: (context, index) {
-              final item = _milestones[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF174C3A),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
+    return ValueListenableBuilder<int>(
+      valueListenable: selectedIndex,
+      builder: (context, index, _) {
+        final item = _milestones[index];
+        return Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF174C3A),
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Row(
                     children: [
                       // Left: Text
                       Expanded(
@@ -316,34 +310,76 @@ class HomeScreen extends StatelessWidget {
                                 fontSize: 14,
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 8),
+
+                            //milestone display
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: List.generate(_milestones.length, (i) {
+                                final isActive = i == index;
+                                return GestureDetector(
+                                  onTap: () => selectedIndex.value = i,
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    width: isActive ? 32 : 24,
+                                    height: isActive ? 32 : 24,
+                                    decoration: BoxDecoration(
+                                      color: isActive
+                                          ? Colors.white
+                                          : Colors.white.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: isActive
+                                            ? Colors.green
+                                            : Colors.transparent,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      _milestones[i].point.toString(),
+                                      style: TextStyle(
+                                        color: isActive
+                                            ? Colors.green
+                                            : Colors.black54,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: isActive ? 12 : 10,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                            const SizedBox(height: 8),
                             Text(
                               item.title,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            const SizedBox(height: 2),
                             Text(
                               item.description,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 13,
+                                fontSize: 12,
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 6),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 color: Colors.black.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 'Earn ${item.point} ★ to unlock the reward',
                                 style: const TextStyle(
                                   color: Colors.white,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -356,28 +392,20 @@ class HomeScreen extends StatelessWidget {
                         flex: 1,
                         child: Image.asset(
                           item.imagePath,
-                          height: 80,
+                          height: 60,
                           fit: BoxFit.contain,
                         ),
                       ),
                     ],
                   ),
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 18),
-        ValueListenableBuilder<int>(
-          valueListenable: _currentPage,
-          builder: (context, page, _) {
-            return _RewardProgressBar(
-              milestones: _milestones.map((e) => e.point).toList(),
-              currentIndex: page,
-            );
-          },
-        ),
-      ],
+                  const SizedBox(height: 16),
+                  // Milestone Row
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -702,11 +730,11 @@ class _RewardProgressBar extends StatelessWidget {
         children: [
           // Main line
           Positioned.fill(
-            top: 22,
+            top: 64,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              height: 4,
-              color: Colors.white.withOpacity(0.25),
+              margin: const EdgeInsets.symmetric(horizontal: 32),
+              height: 1,
+              color: const Color.fromARGB(255, 226, 226, 226).withOpacity(0.25),
             ),
           ),
           // Milestone dots

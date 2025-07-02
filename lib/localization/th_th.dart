@@ -115,6 +115,7 @@ final Map<String, String> thTH = {
   'General': 'ทั่วไป',
   'Security': 'ความปลอดภัย',
   'Language': 'ภาษา',
+  'Theme': 'ธีม',
   'ABOUT': 'เกี่ยวกับ',
   'FAQs': 'คำถามที่พบบ่อย',
   'Terms of use': 'เงื่อนไขการใช้งาน',
