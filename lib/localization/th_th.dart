@@ -85,7 +85,8 @@ final Map<String, String> thTH = {
   'choose a Starbucks near you': 'เลือกร้าน Starbucks ใกล้คุณ',
   'Order to Table': 'สั่งที่โต๊ะ',
   'Scan Qr code at the table to order': 'สแกน QR โค้ดที่โต๊ะเพื่อสั่งซื้อ',
-
+  'Exclusive for Starbucks® Rewards members.':
+      'เฉพาะสมาชิก Starbucks® Rewards เท่านั้น',
   // Inbox Page
   'Inbox': 'กล่องข้อความ',
   'Edit': 'แก้ไข',

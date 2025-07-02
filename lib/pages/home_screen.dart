@@ -434,10 +434,10 @@ class HomeScreen extends StatelessWidget {
                 child: isLoggedIn
                     ? Text(
                         '${_getGreeting()},\n${user.name}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
                         ),
                       )
                     : Text(

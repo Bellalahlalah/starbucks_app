@@ -17,32 +17,44 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              //ไปหน้า sign in
-              final result = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignInScreen()),
-              );
-              if (result == true) {
-                setState(() {});
-              }
-            },
-            child: Text('Sign in'.tr,
-                style: TextStyle(
-                    color: Color(0xFF00704A), fontWeight: FontWeight.bold)),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: Container(
+          padding: const EdgeInsets.only(top: 48),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.chevron_left,
+                  color: Theme.of(context).textTheme.titleLarge?.color),
+              onPressed: () => Navigator.pop(context),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: TextButton(
+                  onPressed: () async {
+                    //ไปหน้า sign in
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignInScreen()),
+                    );
+                    if (result == true) {
+                      setState(() {});
+                    }
+                  },
+                  child: Text('Sign in'.tr,
+                      style: TextStyle(
+                          color: Colors.green, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -50,9 +62,15 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
           children: [
             const SizedBox(height: 16),
             Text('Join now'.tr,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: Theme.of(context).textTheme.titleLarge?.color)),
             const SizedBox(height: 24),
-            Text('Enter your email'.tr, style: TextStyle(fontSize: 16)),
+            Text('Enter your email'.tr,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).textTheme.titleLarge?.color)),
             const SizedBox(height: 12),
             TextField(
               controller: _emailController,
@@ -64,7 +82,8 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
               },
               decoration: InputDecoration(
                 hintText: 'Email'.tr,
-                hintStyle: const TextStyle(color: Colors.grey),
+                hintStyle: TextStyle(
+                    color: Theme.of(context).textTheme.titleLarge?.color),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -82,7 +101,9 @@ class _JoinNowScreenState extends State<JoinNowScreen> {
             const SizedBox(height: 12),
             Text(
               'A verification link will be sent to this email'.tr,
-              style: TextStyle(color: Colors.black54),
+              style: TextStyle(
+                  color: Theme.of(context).textTheme.titleLarge?.color,
+                  fontSize: 14),
             ),
             const Spacer(),
             SizedBox(

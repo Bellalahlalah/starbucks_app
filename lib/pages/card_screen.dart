@@ -130,31 +130,8 @@ class CardScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1E3932),
         elevation: 0,
-        toolbarHeight: 100,
+        toolbarHeight: 20,
         automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 16),
-          child: Row(
-            children: [
-              const Text(
-                '07:02',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(Icons.volume_off, color: Colors.white, size: 20),
-              const Spacer(),
-              const CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage('assets/avatar.jpg'),
-              ),
-            ],
-          ),
-        ),
       ),
       body: ListView(
         padding: EdgeInsets.zero,
