@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:starbucks_app/pages/join_now.dart';
 import 'package:starbucks_app/pages/pay_in_store_screen.dart';
 import 'package:starbucks_app/pages/widgets/bottom_nav_bar.dart';
@@ -98,7 +99,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   // News & Promotions Section
-  Widget _buildNewsPromotionSection() {
+  Widget _buildNewsPromotionSection(context) {
     final List<PromotionItem> promotions = [
       PromotionItem(
         id: '1',
@@ -126,6 +127,7 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.titleLarge?.color,
             ),
           ),
         ),
@@ -418,10 +420,10 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        toolbarHeight: 100,
+        toolbarHeight: 85,
         titleSpacing: 0,
         title: Padding(
-          padding: const EdgeInsets.only(top: 48),
+          padding: const EdgeInsets.only(top: 32),
           child: Align(
             alignment: Alignment.centerRight,
             child: Obx(() {
@@ -655,7 +657,7 @@ class HomeScreen extends StatelessWidget {
                 _buildRewardCarousel(context),
                 const SizedBox(height: 15),
               ],
-              _buildNewsPromotionSection(),
+              _buildNewsPromotionSection(context),
             ],
           ),
         );

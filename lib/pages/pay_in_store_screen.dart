@@ -7,21 +7,27 @@ class PayInStoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'Pay'.tr,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: Container(
+          padding: const EdgeInsets.only(top: 48),
+          child: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            leading: BackButton(
+                color: Theme.of(context).textTheme.titleLarge?.color),
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              'Pay'.tr,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.titleLarge?.color,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
           ),
         ),
       ),
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -29,11 +35,11 @@ class PayInStoreScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   'assets/images/snoopycard.png', // เปลี่ยนเป็น path ของคุณ
                   width: double.infinity,
-                  height: 200,
+                  height: 210,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -43,9 +49,13 @@ class PayInStoreScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  const Text(
+                  Text(
                     '(4034)',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                    ),
                   ),
                   const Spacer(),
                   TextButton(
@@ -53,7 +63,7 @@ class PayInStoreScreen extends StatelessWidget {
                     child: Text(
                       'Change'.tr,
                       style: TextStyle(
-                        color: Colors.green,
+                        color: Theme.of(context).textTheme.bodySmall?.color,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -72,26 +82,32 @@ class PayInStoreScreen extends StatelessWidget {
                     'CARD BALANCE'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black54,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                       fontSize: 14,
                     ),
                   ),
                   const Spacer(),
                   Row(
                     children: [
-                      const Text(
+                      Text(
                         '฿ 0.00',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Icon(Icons.refresh, size: 18, color: Colors.green[700]),
+                      Icon(Icons.refresh,
+                          size: 18,
+                          color: Theme.of(context).textTheme.bodySmall?.color),
                       const SizedBox(width: 4),
-                      const Text(
+                      Text(
                         '04:49',
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        style: TextStyle(
+                            fontSize: 14,
+                            color:
+                                Theme.of(context).textTheme.titleLarge?.color),
                       ),
                     ],
                   ),
@@ -104,7 +120,9 @@ class PayInStoreScreen extends StatelessWidget {
                 children: [
                   Text(
                     'As of 23 Jun 2025 19:43'.tr,
-                    style: TextStyle(fontSize: 13, color: Colors.black45),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Theme.of(context).textTheme.titleLarge?.color),
                   ),
                 ],
               ),
@@ -128,18 +146,21 @@ class PayInStoreScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     '6169468343364034',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       letterSpacing: 1.2,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                  Text(
                     'Please tell a barista to redeem the reward',
-                    style: TextStyle(fontSize: 13, color: Colors.black45),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Theme.of(context).textTheme.titleLarge?.color),
                   ),
                 ],
               ),

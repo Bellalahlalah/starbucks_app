@@ -40,7 +40,7 @@ class _AccountScreenState extends State<AccountScreen> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
               children: [
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
                 // ชื่อผู้ใช้หรือ Account
                 Align(
                   alignment: Alignment.centerLeft,
@@ -128,7 +128,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
                 // เมนูเมื่อ sign in
                 if (isLoggedIn) ...[
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 0),
                   _sectionTitle('ACCOUNT DETAILS'.tr),
                   _accountMenu(
                     title: 'Your mobile order(s)'.tr,
@@ -155,7 +155,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     icon: Icons.star,
                     onTap: () {},
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 4),
                   _divider(),
                 ],
 
@@ -195,7 +195,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   onTap: null,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 // Theme Switcher
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0, right: 0),
@@ -226,7 +226,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   onTap: null,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 _divider(),
 
                 // ABOUT
@@ -252,11 +252,11 @@ class _AccountScreenState extends State<AccountScreen> {
                   onTap: () {},
                 ),
                 if (isLoggedIn) ...[
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 4),
                   _divider(),
                   // Delete account (แยกเดี่ยว)
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 0, right: 0),
                       title: Text(
